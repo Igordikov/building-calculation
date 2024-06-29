@@ -7,11 +7,12 @@
     <title>BUILDING CALCULATOR</title>
     
    
+   
 
 
 
     <script type="module" crossorigin src="/building-calculation/commonHelpers.js"></script>
-    <link rel="stylesheet" href="/building-calculation/assets/index-b70af4cf.css">
+    <link rel="stylesheet" href="/building-calculation/assets/index-8d7c999d.css">
   </head>
   <body>
 
@@ -23,30 +24,30 @@
           <form class="form-css" action="">
             
             <label class="label-css"> Пропорция песка
-              <input class="input-css" type="text" name="proportion" placeholder="введтите цифру">
+              <input class="input-css" type="text" name="proportion" placeholder="введтите целое число">
             </label>
         
-            <label class="label-css"> Сторона "А" поверхности
-              <input class="input-css" type="text" name="width" placeholder="введите ширину в метрах">
+            <label class="label-css"> Сторона "А" поверхности (м)
+              <input class="input-css" type="text" name="side-a" placeholder="через точку (напр 0.5 или 3)">
             </label>
 
-            <label class="label-css"> Сторона "В" поверхности
-              <input class="input-css" type="text" name="length" placeholder="введите длину в метрах">
+            <label class="label-css"> Сторона "В" поверхности (м)
+              <input class="input-css" type="text" name="side-b" placeholder="через точку (напр 0.5 или 3)">
             </label>
 
-            <label class="label-css"> Толщина поверхности 
-              <input class="input-css" type="text" name="weight" placeholder="введите толщину в метрах">
+            <label class="label-css"> Толщина поверхности (м)
+              <input class="input-css" type="text" name="weight" placeholder="через точку (напр 0.03)">
             </label>
 
             <label class="label-css"> Ширины проемов (м)
-              <input class="input-css" type="text" name="" placeholder="через точку с запятой">
+              <input class="input-css" type="text" name="widths-openings" placeholder="через точку с запятой">
             </label>
 
             <label class="label-css"> Длины проемов (м)
-              <input class="input-css" type="text" name="" placeholder="через точку с запятой">
+              <input class="input-css" type="text" name="lengths-openings" placeholder="через точку с запятой">
             </label>
           </form>
-<button class="button is-primary is-rounded" type="submit">Расчитать</button>
+<button class="btn-calc-js" type="submit">Расчитать</button>
 
         </div>
       </section>
