@@ -1,144 +1,95 @@
 
-// ==========================================================
-
-// function#1
-
-// function displayMessage(msgText, msgType) {
-//     const html = document.querySelector("html");
-// const panel = document.createElement("div");
-// panel.setAttribute("class", "msgBox ");
-// html.appendChild(panel);
-
-// const msg = document.createElement("p");
-// msg.textContent = msgText;
-// panel.appendChild(msg);
-
-// const closeBtn = document.createElement("button");
-// closeBtn.textContent = "x";
-// panel.appendChild(closeBtn);
-
-// closeBtn.onclick = function () {
-//     panel.parentNode.removeChild(panel);
-
-//     const btn = document.querySelector("button");
-//     btn.onclick = function () {
-//         displayMessage();
-
-//     };
-// }
-// if (msgType === "warning") {
-//     msg.style.backgroundImage = "url(icons/warning.png)";
-//     panel.style.backgroundColor = "red";
-
-// } else if (msgType === "chat") {
-//     msg.style.backgroundImage = "url(icons/chat.png)";
-//     panel.style.backgroundColor = "aqua";
-
-// } else {
-//     msg.style.paddingLeft = "20px";
-// }
-// }
-
-// displayMessage ();
-
-// ==========================================================
 
 
 
+// кнопка
+const buttonForCalc = document.querySelector('.btn-calc-js');
 
-
-
-// ==========================================================
-
-// function sum (x, y) {
-// const sum = x + y;
-// console.log(sum);
-// }
-// sum (12244, 5423)
-
-// ==========================================================
-
-
-
-
-
-
-
-
-// ==========================================================
-
-// Функция для расчетов проемов
-
-function calculateOpenings(widths, lengths) {
-    if (widths.length !== lengths.length) {
-        console.error("Количество ширин и длин должно совпадать!");
-        return;
-    }
-
-    let totalAreaOpenings = 0;
+buttonForCalc.addEventListener('click', function () {
+    calculateOpenings();
+    solutionCalculation();
     
+});
+
+let totalAreaOpenings = 0;
+
+
+function calculateOpenings() {
+    
+    const widthInput = document.querySelector('[name="widths-openings"]').value.toString();
+    const lengthInput = document.querySelector('[name="lengths-openings"]').value.toString();
+
+    const widths = widthInput.split(';').map(Number);
+    const lengths = lengthInput.split(';').map(Number);
+    
+    
+
+    
+
     for (let i = 0; i < widths.length; i++) {
-        const quadrature = widths[i] * lengths[i];
-        console.log(`Проем ${i + 1}: ${quadrature.toFixed(2)} м.кв`);
-        totalAreaOpenings += quadrature;
+        if (widths[i] && lengths[i] && !isNaN(widths[i]) && !isNaN(lengths[i])) {
+            const quadrature = widths[i] * lengths[i];
+            console.log(`Проем ${i + 1}: ${quadrature.toFixed(2)} м.кв`);
+            totalAreaOpenings += quadrature;
+        }
     }
     console.log(`Общая площадь проемов: ${totalAreaOpenings.toFixed(2)} м.кв`);
     return totalAreaOpenings;
+
 }
 
+calculateOpenings();
 
-
-
-
+          
+            
 // Функция расчета материаллов для расствора
 
 
-function solutionCalculation (width, length, thickness, sandProportion) {
 
-    const proportion = sandProportion;
-    console.log("Пропорция 1 x " + proportion.toFixed());
+function solutionCalculation() {
 
 
-    const totalArea = width * length;
-    const totalAreaOpenings = calculateOpenings ([0.8, 0.8], [2.1, 2.1]);
-    const actualArea  = totalArea - totalAreaOpenings;
 
-    
+    const proportionInput = parseFloat(document.querySelector('[name="proportion"]').value);
+    const sideAInput = parseFloat(document.querySelector('[name="side-a"]').value);
+    const sideBInput = parseFloat(document.querySelector('[name="side-b"]').value);
+    const weightInput = parseFloat(document.querySelector('[name="weight"]').value);
 
-    const volumeOfWork = actualArea * thickness;
-    console.log(`Обьем работы ${volumeOfWork.toFixed(2)} м.куб`);
-    
+    if (isNaN(proportionInput) || isNaN(sideAInput) || isNaN(sideBInput) || isNaN(weightInput)) {
+        alert('Строки размеров плоскости и толщины слоя не могут быть пустыми или содержать некорректные значения!');
+    } else {
+
+
+    const totalArea = sideAInput * sideBInput;
+    console.log(`Общая квадратура: ${totalArea} м.кв`)
+
+    const actualArea = totalArea - totalAreaOpenings;
+    console.log(`Актуальная квадратура (без проемов): ${actualArea} м.кв`)
+
+    const volumeOfWork = actualArea * weightInput;
+    console.log(`Объем расствора: ${volumeOfWork.toFixed(2)} м³`);
+
     const volumeOfSolution = volumeOfWork * 2000;
-    console.log(`Масса расствора ${volumeOfSolution.toFixed()} кг`);
-    
-    const cement = volumeOfSolution / (proportion + 1);
-    console.log(`Цемент ${cement.toFixed()} кг`);
+    console.log(`Масса раствора: ${volumeOfSolution.toFixed()} кг`);
+
+    const cement = volumeOfSolution / (proportionInput + 1);
+    console.log(`Цемент: ${cement.toFixed()} кг`);
 
     const bagsOfCement = cement / 25;
-    console.log(`Цемент в мешках ${bagsOfCement.toFixed(2)} шт по 25кг`)
+    console.log(`Цемент в мешках (по 25 кг): ${bagsOfCement.toFixed(2)} шт.`);
+
+    const sand = cement.toFixed(2) * proportionInput;
+    console.log(`Песок: ${sand.toFixed()} кг`);
+}}
+
+
     
-    const sand = cement.toFixed(2) * proportion;
-    console.log(`Песок ${sand.toFixed()} кг`);
-    };
+
     
-    solutionCalculation(4, 2.5, 0.02, 4);
 
+// ===================================================================================
 
-
-
-
-
-
-
-
-// ==========================================================
-
-
-
-
-
-
-
-
+        
+    
 
 
